@@ -32,8 +32,42 @@ LRU :: ~LRU(){
     }
 }
 
-LRU :: load(MyDB_PagePtr page){
-    //.first //.second
+LRU size_t :: currLeftMem(){
+    return this->avail.size();
+}
+LRU void :: housekeeping(){
+
+}
+LRU void* :: getBytes(){
+    if(this->avail.size() <= 0){
+        houseKeeping();
+    }
+    if(this->avail.size()<=0){
+        return nullptr;
+    }
+    return this->avail.pop_front(); //make sure byte is not lost
+}
+
+LRU void :: load(MyDB_PagePtr page){
+    void* pos = page->getBytes();
+    pair<MyDB_PagePtr,void*> node= make_pair(page,pos);
+    this->li.push_back(node);
+}
+
+LRU void :: evict(){
+    std::list<pair<MyDB_PagePtr,void*> >::iterator node;
+    for (node=this->li.begin();node.second->isPinned==true;node++){
+        ;
+    }
+    void* loc = node->first;
+    MyDB_PagePtr temp = node->second;
+    this->li.erase(node);
+    //write to disk, and empty buffer(just write over it)
+    // non-ananymous page are written to disk
+    if(temp->isDirty()==true){
+        temp->writeDisk(this->pageSize,loc);
+    }
+    this->avail.push_back(loc);
 }
 
 #endif

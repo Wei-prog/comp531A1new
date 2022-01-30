@@ -20,7 +20,7 @@ public:
     void* getBytes();
     size_t currLeftMem();
     void load(MyDB_PagePtr page); //save to mem buffer, same time update lru
-    void evict(MyDB_PagePtr page); //evict from lru, page not killed(see ref), not in buffer
+    void evict(); //evict from lru, page not killed(see ref), not in buffer
     void houseKeeping(); //check everything fine in mem buffer and LRU
 
 private:

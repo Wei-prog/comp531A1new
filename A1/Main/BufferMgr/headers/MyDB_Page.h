@@ -25,7 +25,7 @@ public:
     void *getBytes();
     void incRef();
     void decRef();
-
+    void writeDisk(size_t pageSize,void* loc);
 
 private:
 
