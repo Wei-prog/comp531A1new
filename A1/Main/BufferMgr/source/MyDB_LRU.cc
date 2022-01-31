@@ -40,7 +40,7 @@ LRU void :: housekeeping(){
 }
 LRU void* :: getBytes(){
     if(this->avail.size() <= 0){
-        houseKeeping();
+        evict();
     }
     if(this->avail.size()<=0){
         return nullptr;
@@ -57,7 +57,9 @@ LRU void :: load(MyDB_PagePtr page){
 LRU void :: evict(){
     std::list<pair<MyDB_PagePtr,void*> >::iterator node;
     for (node=this->li.begin();node.second->isPinned==true;node++){
-        ;
+        if node == this->li.end(){
+            exit(0);
+        }
     }
     void* loc = node->first;
     MyDB_PagePtr temp = node->second;

@@ -57,14 +57,14 @@ public:
 	size_t pageSize;
 	size_t numPages;
 	string tempFile;
-
+	
 
 private:
 
-	LRU :: LRU lru;
+	LRU :: LRU *lru;
 	vector<void*> memBuffer;
 	map<pair<MyDB_TablePtr,long>, MyDB_PagePtr > lookupTable;
-
+	long fileOffset;
 };
 
 #endif

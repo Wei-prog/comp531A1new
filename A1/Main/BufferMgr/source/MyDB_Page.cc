@@ -22,6 +22,9 @@ void MyDB_Page::decRef() {
         this->isPinned = false;
     }
 }
+int MyDB_Page ::getRef(){
+    return this->ref;
+}
 void MyDB_Page::writeDisk(size_t pageSize,void* loc){
     MyDB_TablePtr dest = this->pageId.first;
     long offset = this->pageId.second;
@@ -44,6 +47,7 @@ MyDB_Page ::MyDB_Page(pair<MyDB_TablePtr,long> pageId, void* bytesVal, MyDB_Buff
     this->bytes = bytesVal;
 }
 MyDB_Page ::~MyDB_Page(){
+    free(this);
 }
 
 #endif
