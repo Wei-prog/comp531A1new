@@ -2,11 +2,8 @@
 #ifndef BUFFER_MGR_C
 #define BUFFER_MGR_C
 
-#include "MyDB_LRU.h"
-#include "MyDB_PageHandle.h"
-#include "MyDB_BufferManager.h"
-#include "MyDB_Table.h"
-#include "MyDB_Page.h"
+#include "../headers/MyDB_BufferManager.h"
+
 #include <cstdlib>
 #include <map>
 #include <vector>
@@ -32,7 +29,7 @@ MyDB_PageHandle MyDB_BufferManager :: getPage (MyDB_TablePtr whichTable, long i)
 	} else {
 		MyDB_PagePtr oldPage = this->lookupTable[pageId];
 		if(oldPage==nullptr || oldPage->getRef()<=0){
-			delete(oldPage); //?
+			//delete(oldPage); //?
 			void* dst = this->lru->getBytes();
 			if(dst == nullptr){
 				exit(0); //buffer memeory all pinned
@@ -72,7 +69,6 @@ MyDB_PageHandle MyDB_BufferManager :: getPinnedPage (MyDB_TablePtr whichTable, l
 	} else {
 		MyDB_PagePtr oldPage = this->lookupTable[pageId];
 		if(oldPage==nullptr || oldPage->getRef()<=0){
-			delete(oldPage); //?
 			void* dst = this->lru->getBytes();
 			if(dst == nullptr){
 				exit(0); //buffer memeory all pinned
@@ -97,7 +93,7 @@ MyDB_PageHandle MyDB_BufferManager :: getPinnedPage () {
 }
 
 void MyDB_BufferManager :: unpin (MyDB_PageHandle unpinMe) {
-	unPinMe->myPage->isPinned = false;
+	unpinMe->myPage->isPinned = false;
 }
 
 MyDB_BufferManager :: MyDB_BufferManager (size_t pageSize, size_t numPages, string tempFile) {

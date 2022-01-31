@@ -149,7 +149,7 @@ int main () {
 			QUNIT_IS_EQUAL (string (answer), string (bytes));
 		}
 	}
-		QUnit::UnitTest qunit(cerr, QUnit::normal);
+		//QUnit::UnitTest qunit(cerr, QUnit::normal);
 
 	// buffer manager and temp page
 	cout << "TEST 1..." << flush;

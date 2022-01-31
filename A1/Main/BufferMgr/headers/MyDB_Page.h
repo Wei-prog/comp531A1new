@@ -3,17 +3,15 @@
 #define PAGE_H
 
 #include "MyDB_Table.h"
-#include "MyDB_BufferManager.h"
+
 #include <string>
 #include <memory>
 
 using namespace std;
 class MyDB_Page;
 typedef shared_ptr <MyDB_Page> MyDB_PagePtr;
+class MyDB_BufferManager;
 class MyDB_Page{
-
-
-
 
 public:
 

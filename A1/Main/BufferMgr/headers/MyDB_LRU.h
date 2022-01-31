@@ -29,6 +29,7 @@ private:
     std::list< pair<MyDB_PagePtr,void*> > li;
     std::list<void*> avail;
     size_t length;
+    size_t pageSize;
     MyDB_BufferManager &boss;    
     
 };

@@ -10,12 +10,22 @@
 #include <map>
 #include <vector>
 #include<string>
-
 using namespace std;
 
 class MyDB_BufferManager {
 
 public:
+	
+	// creates an LRU buffer manager... params are as follows:
+	// 1) the size of each page is pageSize 
+	// 2) the number of pages managed by the buffer manager is numPages;
+	// 3) temporary pages are written to the file tempFile
+	MyDB_BufferManager (size_t pageSize, size_t numPages, string tempFile);
+	
+	// when the buffer manager is destroyed, all of the dirty pages need to be
+	// written back to disk, any necessary data needs to be written to the catalog,
+	// and any temporary files need to be deleted
+	~MyDB_BufferManager ();
 
 	// THESE METHODS MUST APPEAR AND THE PROTOTYPES CANNOT CHANGE!
 
@@ -42,16 +52,6 @@ public:
 	// un-pins the specified page
 	void unpin (MyDB_PageHandle unpinMe);
 
-	// creates an LRU buffer manager... params are as follows:
-	// 1) the size of each page is pageSize 
-	// 2) the number of pages managed by the buffer manager is numPages;
-	// 3) temporary pages are written to the file tempFile
-	MyDB_BufferManager (size_t pageSize, size_t numPages, string tempFile);
-	
-	// when the buffer manager is destroyed, all of the dirty pages need to be
-	// written back to disk, any necessary data needs to be written to the catalog,
-	// and any temporary files need to be deleted
-	~MyDB_BufferManager ();
 
 	
 	size_t pageSize;
@@ -61,7 +61,7 @@ public:
 
 private:
 
-	LRU :: LRU *lru;
+	LRU *lru;
 	vector<void*> memBuffer;
 	map<pair<MyDB_TablePtr,long>, MyDB_PagePtr > lookupTable;
 	long fileOffset;
