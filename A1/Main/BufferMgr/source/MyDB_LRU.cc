@@ -4,7 +4,7 @@
 
 #include "MyDB_Page.h"
 #include "LRU.h"
-#include "MyDB_Table.h"
+#include "../../Catalog/headers/MyDB_Table.h"
 #include "MyDB_BufferManager.h"
 #include <list>
 #include <string>

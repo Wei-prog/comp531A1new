@@ -3,7 +3,7 @@
 #define BUFFER_MGR_H
 
 #include "MyDB_PageHandle.h"
-#include "MyDB_Table.h"
+#include "../../Catalog/headers/MyDB_Table.h"
 #include "MyDB_Page.h"
 #include "MyDB_LRU.h"
 #include <cstdlib>
@@ -61,7 +61,7 @@ public:
 
 private:
 
-	LRU :: LRU *lru;
+	LRU *lru;
 	vector<void*> memBuffer;
 	map<pair<MyDB_TablePtr,long>, MyDB_PagePtr > lookupTable;
 	long fileOffset;

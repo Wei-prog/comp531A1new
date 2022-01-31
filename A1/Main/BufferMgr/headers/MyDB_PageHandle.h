@@ -4,6 +4,7 @@
 
 #include <memory>
 #include "MyDB_Page.h"
+#include "../../Catalog/headers/MyDB_Table.h"
 
 // page handles are basically smart pointers
 using namespace std;

@@ -3,7 +3,7 @@
 #define LRU_H
 
 #include "MyDB_Page.h"
-#include "MyDB_Table.h"
+#include "../../Catalog/headers/MyDB_Table.h"
 #include "MyDB_BufferManager.h"
 #include <list>
 #include <string>
@@ -12,7 +12,6 @@
 
 using namespace std;
 class LRU{
-
 public:
 
     LRU(size_t length,size_t pageSize,void* buffLoc,MyDB_BufferManager &boss);
