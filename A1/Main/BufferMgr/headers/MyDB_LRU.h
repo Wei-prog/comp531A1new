@@ -15,7 +15,7 @@ class LRU{
 
 public:
 
-    LRU(size_t length ,MyDB_BufferManager &boss);
+    LRU(size_t length,size_t pageSize,void* buffLoc,MyDB_BufferManager &boss);
     ~LRU();
     void* getBytes();
     size_t currLeftMem();

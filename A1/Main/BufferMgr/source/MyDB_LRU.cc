@@ -62,8 +62,8 @@ LRU void :: evict(){
     void* loc = node->first;
     MyDB_PagePtr temp = node->second;
     this->li.erase(node);
-    //write to disk, and empty buffer(just write over it)
-    // non-ananymous page are written to disk
+    //write to disk, set dirty to false
+    //pages are written to disk, right now memory is not cleaned, so data length in pageSize must be same
     if(temp->isDirty()==true){
         temp->writeDisk(this->pageSize,loc);
     }

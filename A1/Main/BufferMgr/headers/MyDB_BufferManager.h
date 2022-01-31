@@ -5,6 +5,8 @@
 #include "MyDB_PageHandle.h"
 #include "MyDB_Table.h"
 #include "MyDB_Page.h"
+#include "MyDB_LRU.h"
+#include <cstdlib>
 #include <map>
 #include <vector>
 #include<string>
@@ -51,12 +53,17 @@ public:
 	// and any temporary files need to be deleted
 	~MyDB_BufferManager ();
 
-	vector<void*> memBuffer;
-	map<pair<MyDB_TablePtr,long>,MyDB_Pageptr> lookupTable;
+	
+	size_t pageSize;
+	size_t numPages;
+	string tempFile;
+
 
 private:
 
-	
+	LRU :: LRU lru;
+	vector<void*> memBuffer;
+	map<pair<MyDB_TablePtr,long>, MyDB_PagePtr > lookupTable;
 
 };
 
