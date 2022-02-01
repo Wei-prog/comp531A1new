@@ -27,7 +27,7 @@ public:
     void writeDisk(size_t pageSize,void* loc);
 
 private:
-
+    friend class MyDB_BufferManager; 
     MyDB_BufferManager &boss;
     pair<MyDB_TablePtr,long> pageId;
     void* bytes;

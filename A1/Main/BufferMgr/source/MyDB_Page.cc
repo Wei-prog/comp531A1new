@@ -40,14 +40,14 @@ void MyDB_Page::writeDisk(size_t pageSize,void* loc){
     close(fd);
     this->isDirty=false;
 }
-MyDB_Page ::MyDB_Page(pair<MyDB_TablePtr,long> pageId, void* bytesVal, MyDB_BufferManager &boss){
+MyDB_Page ::MyDB_Page(pair<MyDB_TablePtr,long> pageId, void* bytesVal, MyDB_BufferManager &boss):boss(boss){
     this->ref = 0;
-    this->boss = boss;
+    //this->boss = boss;
     this->pageId = pageId;
     this->bytes = bytesVal;
 }
 MyDB_Page ::~MyDB_Page(){
-    free(this);
+    //free(this);
 }
 
 #endif
